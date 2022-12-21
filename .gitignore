@@ -51,3 +51,4 @@ replay_pid*
 .gradle/7.4/fileHashes/fileHashes.lock
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .gradle/buildOutputCleanup/outputFiles.bin
+*.bin
