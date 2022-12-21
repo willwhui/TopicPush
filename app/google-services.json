@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1073164262212",
+    "project_id": "topicpush-9d6f9",
+    "storage_bucket": "topicpush-9d6f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073164262212:android:604a25958cd1d967e09511",
+        "android_client_info": {
+          "package_name": "ml.mypals.topicpush"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073164262212-7orb7a230r52jetr8s64volh1gco3uss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPxxcLuMOBy8zOnFklyjRd9tfFLOFeQtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073164262212-7orb7a230r52jetr8s64volh1gco3uss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
