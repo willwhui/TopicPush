@@ -9,7 +9,11 @@ The client app will only receive the suscribed topic message.
 
 Official document:
 
-https://firebase.google.com/docs/cloud-messaging/android/send-multiple
+https://firebase.google.com/docs/cloud-messaging/android/send-
+
+Official sample project:
+
+https://github.com/firebase/quickstart-android/blob/master/messaging/app/src/main/res/values/strings.xml
 
 the key modification:
 
