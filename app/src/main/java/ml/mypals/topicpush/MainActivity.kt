@@ -1,15 +1,13 @@
 package ml.mypals.topicpush
 
-import android.Manifest
 import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
@@ -48,14 +46,52 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Firebase.messaging.subscribeToTopic("TopicForMan")
-            .addOnCompleteListener { task ->
-                var msg = "Subscribed"
-                if (!task.isSuccessful) {
-                    msg = "Subscribe failed"
+    }
+
+    // response to UI subscription checkbox
+    public fun onCheckSubscribeTopic(view: View) {
+        if (view is CheckBox) {
+            when (view.id) {
+                R.id.checkBoxForMan -> {
+                    subscribeTopic("TopicForMan", view.isChecked)
                 }
-                Log.d(TAG, msg)
-                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                R.id.checkBoxForWoman -> {
+                    subscribeTopic("TopicForWoman", view.isChecked)
+                }
             }
+        }
+    }
+
+    private fun subscribeTopic(topic: String, bSubscribe: Boolean) {
+        when (bSubscribe) {
+            true -> Firebase.messaging.subscribeToTopic(topic)
+                    .addOnCompleteListener { task ->
+                        toastMessage(topic, true, task.isSuccessful)
+                    }
+            false -> Firebase.messaging.unsubscribeFromTopic(topic)
+                    .addOnCompleteListener { task ->
+                        toastMessage(topic, false, task.isSuccessful)
+                    }
+        }
+    }
+
+    private fun toastMessage(topic: String, bSubscribe: Boolean, bSucceeded: Boolean){
+        val suffixSucceeded = when (bSubscribe) {
+            true -> ": Subscribed."
+            false -> ": unsubscribed."
+        }
+
+        val suffixFailed = when (bSubscribe) {
+            true -> ": Subscribe failed."
+            false -> ": Unsubscribe failed."
+        }
+
+        val msg = when (bSucceeded) {
+            true -> topic + suffixSucceeded
+            false -> topic +suffixFailed
+        }
+
+        Log.d(TAG, msg)
+        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
     }
 }
