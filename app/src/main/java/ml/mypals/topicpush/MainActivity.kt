@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.checkBoxForWoman -> {
                     subscribeTopic("TopicForWoman", view.isChecked)
                 }
+                R.id.checkBoxForMarried -> {
+                    subscribeTopic("TopicForMarried", view.isChecked)
+                }
             }
         }
     }

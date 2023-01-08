@@ -56,6 +56,17 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+        if (remoteMessage.notification == null) {
+            val showNotify = remoteMessage.data.get("showNotify")
+            if (showNotify.equals("show")) {
+                sendNotification("It is a Notify from Data Message.")
+            } else {
+                sendNotification("This Data Message should not be shown.")
+            }
+        }
+        else {
+            sendNotification("It is a Notify from Notify Message")
+        }
     }
     // [END receive_message]
 
