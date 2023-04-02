@@ -1,15 +1,17 @@
 package ml.mypals.topicpush
 
 import android.content.ContentValues.TAG
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+
 
 class MainActivity : AppCompatActivity() {
     // Declare the launcher at the top of your Activity/Fragment:
@@ -46,6 +48,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Check if the activity was launched from a notification.
+        // Check if the activity was launched from a notification.
+        if (intent.extras != null) {
+            // Get the custom data from the intent extras, when wake up from background
+            val val1 = intent.getStringExtra("AAA")
+            val val2 = intent.getStringExtra("BBB")
+            val showNotify = intent.getStringExtra("showNotify")
+
+            Log.d("OnCreate", "getStringExtra($val1)")
+            Log.d("OnCreate", "getStringExtra($val2)")
+            Log.d("OnCreate", "getStringExtra($showNotify)")
+            // Handle the custom data.
+            // For example, you could update the UI to display the score and level.
+            // myUpdateUI(score, level)
+            val intent = Intent(this, ShowNotifyActivity2::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                putExtra("contentOfNotify", "from background: " + val2)
+            }
+            startActivity(intent)
+        }
     }
 
     // response to UI subscription checkbox
